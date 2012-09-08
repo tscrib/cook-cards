@@ -49,7 +49,9 @@ describe "RecipePages" do
 		end
 
 		it { should have_selector('title', text: recipe.title) }
-		it { should have_selector('h3', text: recipe.title) }
+		it { should have_selector('text', text: recipe.ingredients) }
+		it { should have_selector('text', text: recipe.directions) }
+		it { should have_link('Click for larger photo', href: recipe.photo_url) }
 
 	end
 

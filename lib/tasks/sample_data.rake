@@ -21,7 +21,13 @@ namespace :db do
     end
 
     # create 50 recipes
-    50.times do |n|
+    # But first make one that makes sense
+    Recipe.create!( title: "Onion Quiche",
+        directions: "1. Take out Ingredients\n2. Make the quiche",
+        ingredients: "eggs, bread, milk, cinnamon",
+        photo_url: "http://1.bp.blogspot.com/_sVmXW6c9FJE/ShqDlqHymuI/AAAAAAAADQA/otVS1-1UL7g/s400/creamy-quiche-lorraine.jpg")
+
+    49.times do |n|
       title = Faker::Lorem.words
       directions = Faker::Lorem.paragraph
       ingredients = Faker::Lorem.paragraph

@@ -1,0 +1,35 @@
+<div class="hero-unit">
+	<div class="row">
+		<div class="span2" title="recipe summary">
+			<div class="row">
+				<a href=<%= @recipe.photo_url %> class="thumbnail" title="Click for larger photo">
+					<img src=<%= @recipe.photo_url %> class="img-polaroid">
+				</a>
+			</div>
+			<br>
+			<div class="row">
+				<i class="icon-time"></i> 45min
+			</div>
+			<div class="row">
+				<i class="icon-home"></i> Serves 4
+			</div>
+		</div>
+		<div class="span3 offset1" title="content">
+			<div class="row">
+				<h3><%= @recipe.title %></h3>
+			</div>
+			<br>
+			<br>
+			<br>
+			<div class="row">
+				<h4>Ingredients</h4>
+				<text><%= @recipe.ingredients -%></text>
+			</div>
+			<br>
+			<div class="row">
+				<h4>Directions</h4>
+				<text><%= @recipe.directions %></text>
+			</div>
+		</div>
+	</div>
+</div>
