@@ -9,6 +9,7 @@ describe "Authentication" do
 	let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
 	let(:non_admin) { FactoryGirl.create(:user) }
 	let(:admin) { FactoryGirl.create(:admin) }
+	let(:recipe) { FactoryGirl.create(:recipe) }
 
 	describe "signin page" do
 		before { visit signin_path }
@@ -124,6 +125,25 @@ describe "Authentication" do
 			# 		it { should_not have_link('delete', href: micropost_path(wrong_user)) }
 			# 	end
 			# end
+
+			describe "in the Recipes controller" do
+
+				describe "visit recipe index" do
+					before { visit recipes_path }
+					it { should have_selector('title', text: "Sign in") }
+				end
+
+				describe "visit specific recipe" do
+					before { visit recipes_path(1) }
+					it { should have_selector('title', text: "Sign in") }
+				end
+
+				describe "visit recipe new" do
+					before { visit new_recipe_path }
+					it { should have_selector('title', text: "Sign in") }
+				end
+
+			end
 		end
 
 		describe "as wrong user" do

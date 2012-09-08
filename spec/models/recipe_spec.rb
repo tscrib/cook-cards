@@ -3,7 +3,6 @@
 # Table name: recipes
 #
 #  id          :integer          not null, primary key
-#  user_id     :integer
 #  title       :string(255)
 #  ingredients :text
 #  directions  :text
@@ -26,7 +25,7 @@ describe Recipe do
 
 	subject { recipe }
 
-	it { should respond_to(:user_id) }
+	# it { should respond_to(:user_id) }
 	it { should respond_to(:title) }
 	it { should respond_to(:ingredients) }
 	it { should respond_to(:directions) }
@@ -36,18 +35,8 @@ describe Recipe do
 	it { should be_valid }
 
 	describe "validations" do
-		# describe "accessible attributes" do
-		# 	it "should not allow access to user_id" do
-		# 		expect do
-		# 			Recipe.new(user_id: user.id)
-		# 		end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
-		# 	end    
-		# end
 
-		# describe "when user_id is not present" do
-		# 	before { @recipe.user_id = nil }
-		# 	it { should_not be_valid }
-		# end
+		# Presence tests
 
 		describe "with blank title" do
 			before { recipe.title = " " }
@@ -63,6 +52,8 @@ describe Recipe do
 			before { recipe.photo_url = " " }
 			it { should_not be_valid }
 		end
+
+		# Format Tests
 
 		describe "with bad photo url" do
 			before { recipe.photo_url = "www.google" }

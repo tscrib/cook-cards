@@ -1,4 +1,4 @@
-<% provide(:title, "Recipes") %>
+<% provide(:title, @recipe.title) %>
 <div class="row">
 	
 	<aside class="span4">
@@ -13,6 +13,6 @@
 <div class="row">
 
 	<div class="span8 offset4">
-      <h3><%= @recipe.title.capitalize %> </h3>
+      <h3><%= @recipe.title %> </h3>
     </div>
 </div>
