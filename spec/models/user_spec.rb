@@ -29,6 +29,7 @@ describe User do
 	it { should respond_to(:remember_token) }
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:recipes) }
   # it { should respond_to(:microposts) }
   # it { should respond_to(:feed) }
 
@@ -166,6 +167,11 @@ describe User do
   	its(:remember_token) { should_not be_blank }
   end
 
+  # recipes tests
+  describe "recipes associations" do
+    
+    
+  end
   # micropost tests
   # describe "micropost associations" do
 
