@@ -20,11 +20,23 @@ namespace :db do
        password_confirmation: password)
     end
 
-    # populate the first 6 users with 50 microposts each
-    users = User.all(limit: 6)
-    50.times do
-      content = Faker::Lorem.sentence(5)
-      users.each { |user| user.microposts.create!(content: content) }
+    # create 50 recipes
+    50.times do |n|
+      title = Faker::Lorem.words
+      directions = Faker::Lorem.paragraph
+      ingredients = Faker::Lorem.paragraph
+      # photo_url = Faker::Internet.ip_v4_address
+      Recipe.create!( title: title,
+        directions: directions,
+        ingredients: ingredients,
+        photo_url: "http://www.example-#{n}.com")
     end
+
+    # populate the first 6 users with 50 microposts each
+    # users = User.all(limit: 6)
+    # 50.times do
+    #   content = Faker::Lorem.sentence(5)
+    #   users.each { |user| user.microposts.create!(content: content) }
+    # end
   end
 end

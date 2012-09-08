@@ -1,7 +1,7 @@
 class CreateRecipes < ActiveRecord::Migration
   def change
     create_table :recipes do |t|
-      t.integer :user_id
+      t.integrer :user_id
       t.string :title
       t.text :ingredients
       t.text :directions
@@ -11,6 +11,6 @@ class CreateRecipes < ActiveRecord::Migration
     end
 
     # Indexes
-    add_index :recipes, [:title, :user_id, :created_at]
+    add_index :recipes, [:title, :created_at]
   end
 end

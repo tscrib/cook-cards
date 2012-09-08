@@ -1,0 +1,23 @@
+<% provide(:title, "Recipes") %>
+<div class="row">
+	
+	<aside class="span4">
+		<section>
+			<h1>
+				<%= gravatar_for @user, size: 40 %>
+				<%= @user.name %>
+			</h1>
+		</section>
+	</aside>
+</div>
+<div class="row">
+
+	<div class="span8 offset4">
+      <h3>All of <%= @user.name %>'s Recipes </h3>
+      <br>
+      <ol class="recipes">
+        <%= render @recipes %>
+      </ol>
+      <%= will_paginate %>
+    </div>
+</div>

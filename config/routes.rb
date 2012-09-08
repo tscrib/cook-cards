@@ -7,8 +7,9 @@ SampleApp::Application.routes.draw do
   # These automatically create the seven HTTP actions:
   # index, new, create, show, edit, update, destroy (unless limited by only:)
   resources :users
+  resources :recipes
   resources :sessions, only: [:new, :create, :destroy]
-  resources :microposts, only: [:create, :destroy]
+  # resources :microposts, only: [:create, :destroy]
 
   # Custom routes
   root to: 'static_pages#home'

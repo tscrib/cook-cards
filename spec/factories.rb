@@ -22,6 +22,5 @@ FactoryGirl.define do
 		directions "Lorem ipsum"
 		ingredients "e pluribus unum"
 		photo_url "http://i.istockimg.com/file_thumbview_approve/157077/2/stock-photo-157077-e-pluribus-unum.jpg"
-		user
 	end
 end
