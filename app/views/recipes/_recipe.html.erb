@@ -16,14 +16,14 @@
 
 	</div>
 	<div class="span2">
-
-		<%= btn_icon "icon-plus" %>
-		
-		<% if current_user.admin? %>
-			<%= btn_icon "icon-remove", { obj: recipe, method: :delete } %>
-			<%= btn_icon "icon-pencil", { obj: recipe, method: :put } %>
+		<% if !current_user.nil? %>
+			<%= btn_icon "icon-plus" %>
+			
+			<% if current_user.admin? %>
+				<%= btn_icon "icon-remove", { obj: recipe, method: :delete } %>
+				<%= btn_icon "icon-pencil", { obj: "recipes/#{recipe.id}/edit", method: :get } %>
+			<% end %>
 		<% end %>
-
 	</div>
 
 </li>

@@ -10,6 +10,11 @@ describe "Authentication" do
 	let(:non_admin) { FactoryGirl.create(:user) }
 	let(:admin) { FactoryGirl.create(:admin) }
 	let(:recipe) { FactoryGirl.create(:recipe) }
+	@search_recipe = Recipe.new(title: "Smoothies", 
+						ingredients: "lots of fruits",
+						directions: "mix and blend and enjoy",
+						photo_url: "http://www.google.com/logos/2012/startrek12-hp.jpg")
+					@search_recipe.save!
 
 	describe "signin page" do
 		before { visit signin_path }
@@ -131,7 +136,10 @@ describe "Authentication" do
 				describe "visit recipe index" do
 					before { visit recipes_path }
 					it { should have_selector('title', text: "All Recipes") }
-					
+					it { should_not have_link( "icon-remove" ) }
+					it { should_not have_button( "icon-plus" ) }
+					it { should_not have_link( "icon-pencil" ) }
+
 				end
 
 				describe "visit specific recipe" do
@@ -155,8 +163,18 @@ describe "Authentication" do
 				it { should_not have_selector('title', text: full_title('Edit user')) }
 			end
 
+			describe "visiting Recipes#edit page" do
+				before { visit edit_recipe_path(user) }
+				it { should_not have_selector('title', text: full_title('Edit Recipe')) }
+			end
+
 			describe "submitting a PUT request to the Users#update action" do
 				before { put user_path(wrong_user) }
+				specify { response.should redirect_to(root_path) }
+			end
+
+			describe "submitting a PUT request to the Recipes#update action" do
+				before { put recipe_path(user) }
 				specify { response.should redirect_to(root_path) }
 			end
 		end
@@ -168,6 +186,11 @@ describe "Authentication" do
 				before { delete user_path(user) }
 				specify { response.should redirect_to(root_path) }        
 			end
+
+			describe "submitting a DELETE request to the Recipes#destroy action" do
+				before { delete recipe_path(recipe) }
+				specify { response.should redirect_to(root_path) }        
+			end
 		end
 
 		describe "as admin" do
@@ -176,6 +199,19 @@ describe "Authentication" do
 			describe "submit a DELETE request to destroy yourself" do
 				before { delete user_path(admin) }
 				specify { response.should redirect_to(root_path) }        
+			end
+
+			describe "visit recipe index" do
+				before { visit recipes_path }
+
+				it { should have_link( "icon-remove" ) }
+				it { should have_button( "icon-plus" ) }
+				it { should have_link( "icon-pencil" ) }
+
+				describe "edit button goes to edit page" do
+					before { click_link "icon-pencil" }
+					it { should have_selector('title', text: "Edit Recipe") }
+				end
 			end
 		end
 	end

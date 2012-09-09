@@ -7,6 +7,7 @@ describe "RecipePages" do
 	# define local variables
 	let(:user) { FactoryGirl.create(:user) }
 	let(:recipe) { FactoryGirl.create(:recipe) }
+	let(:admin) { FactoryGirl.create(:admin) }
 
 	describe "index" do
 		before do
@@ -16,6 +17,7 @@ describe "RecipePages" do
 
 		it { should have_selector('title', text: 'All Recipes') }
 		it { should have_selector('h1',    text: 'All Recipes') }
+
 
 		describe "pagination" do
 
@@ -27,6 +29,7 @@ describe "RecipePages" do
 			it "should list each recipe" do
 				Recipe.paginate(page: 1).each do |recipe|
 					page.should have_selector('li', text: recipe.title)
+					page.should have_button( "icon-plus" )
 				end
 			end
 		end
@@ -55,6 +58,7 @@ describe "RecipePages" do
 
 				it { should have_link(@search_recipe.title) }
 				it { should_not have_link(recipe.title) }
+
 
 			end
 			
@@ -86,6 +90,7 @@ describe "RecipePages" do
 
 
 	describe "edit" do
+	
 		
 	end
 
