@@ -1,9 +1,11 @@
 class RecipesController < ApplicationController
-	before_filter :signed_in_user
+	before_filter :signed_in_user, only: [:new, :edit, :update, :destroy]
 
 
 	def index
-		@user = current_user
+		if signed_in?
+			@user = current_user
+		end
 		@recipes = Recipe.search(params[:search], params[:page])
 	end
 
@@ -21,7 +23,9 @@ class RecipesController < ApplicationController
 	end
 
 	def show
-		@user = current_user
+		if signed_in?
+			@user = current_user
+		end
 		@recipe = Recipe.find(params[:id])
 	end
 
