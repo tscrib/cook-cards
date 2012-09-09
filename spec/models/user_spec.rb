@@ -29,6 +29,11 @@ describe User do
 	it { should respond_to(:remember_token) }
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:relationships) }
+  it { should respond_to(:added_recipes) } 
+  it { should respond_to(:added?) }
+  it { should respond_to(:add!) }
+  it { should respond_to(:remove!) }
   # it { should respond_to(:recipes) }
   # it { should respond_to(:microposts) }
   # it { should respond_to(:feed) }
@@ -165,6 +170,26 @@ describe User do
   describe "remember token" do
   	before { @user.save }
   	its(:remember_token) { should_not be_blank }
+  end
+
+
+  # Added recipes tests
+  describe "adding" do
+    let(:other_recipe) { FactoryGirl.create(:recipe) }    
+    before do
+      @user.save
+      @user.add!(other_recipe)
+    end
+
+    it { should be_added( other_recipe ) }
+    its(:added_recipes) { should include( other_recipe ) }
+
+    describe "and removing" do
+      before { @user.remove!(other_recipe) }
+
+      it { should_not be_added(other_recipe) }
+      its(:added_recipes) { should_not include(other_recipe) }
+    end
   end
   
 end

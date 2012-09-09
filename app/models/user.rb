@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
 	attr_accessible :email, :name, :password, :password_confirmation
 	has_secure_password
 	#has_many :microposts, dependent: :destroy
+	has_many :relationships, foreign_key: "user_id", dependent: :destroy
+	has_many :added_recipes, through: :relationships, source: :recipe
 
 	before_save { self.email.downcase! }
 	before_save :create_remember_token
@@ -39,6 +41,17 @@ class User < ActiveRecord::Base
 	#     Micropost.where("user_id = ?", id)
 	# end
 
+	def added?( other_recipe )
+		relationships.find_by_recipe_id( other_recipe.id )
+	end
+
+	def add!( other_recipe )
+		relationships.create!( recipe_id: other_recipe.id )
+	end
+
+	def remove!(other_recipe)
+		relationships.find_by_recipe_id(other_recipe).destroy
+	end
 
 	# Private Function Definitions
 	private

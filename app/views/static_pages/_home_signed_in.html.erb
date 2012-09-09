@@ -1,8 +1,13 @@
 <div class="row">
 	<%= render 'shared/sidebar' %>
 
-	<div class="span8">
-		<!--h3>Micropost Feed</h3-->
-		<!-- should be a render shared/feed  -->
+	<div class="span9">
+		<h1>My Recipes</h1>
+
+		<% @recipes = current_user.added_recipes %>
+
+		<ol class="recipes">
+			<%= render @recipes %>
+		</ol>
 	</div>
 </div>

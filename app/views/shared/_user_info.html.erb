@@ -10,4 +10,14 @@
 		</a>
 		<%= @user.name %>
 	</h1>
+
+	<div class="stats">
+		
+			<strong id="added recipes" class="stat">
+				<%= @user.added_recipes.count %>
+			</strong>
+			Recipes
+		
+	</div>
+
 </section>
