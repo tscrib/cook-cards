@@ -131,6 +131,7 @@ describe "Authentication" do
 				describe "visit recipe index" do
 					before { visit recipes_path }
 					it { should have_selector('title', text: "All Recipes") }
+					
 				end
 
 				describe "visit specific recipe" do

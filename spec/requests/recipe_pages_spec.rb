@@ -45,12 +45,12 @@ describe "RecipePages" do
 					@search_recipe.save!
 				end
 
-				it { should have_button( "search_btn" ) }
+				it { should have_button( "icon-search" ) }
 				it { should have_field('search_field', type: 'text') }
 
 				before do
 					fill_in "search_field", with: "oo"
-					click_button "search_btn"
+					click_button "icon-search"
 				end
 
 				it { should have_link(@search_recipe.title) }
