@@ -9,6 +9,13 @@ namespace :db do
      password_confirmation: "foobar")
     admin.toggle!(:admin)
 
+    # Make the second user an admin
+    admin = User.create!(name: "CarolAnne Black",
+     email: "black.carolanne@gmail.com",
+     password: "foobar",
+     password_confirmation: "foobar")
+    admin.toggle!(:admin)
+
     # create 99 users
     99.times do |n|
       name  = Faker::Name.name

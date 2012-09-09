@@ -46,15 +46,15 @@ describe "RecipePages" do
 				end
 
 				it { should have_button( "search_btn" ) }
-				it { should have_field('search', type: 'text') }
+				it { should have_field('search_field', type: 'text') }
 
-				# before do
-				# 	fill_in "search", with: "frUIt"
-				# 	click_button "search_btn"
-				# end
+				before do
+					fill_in "search_field", with: "oo"
+					click_button "search_btn"
+				end
 
-				# it { should have_link(@search_recipe.title) }
-				# it { should_not have_link(recipe.title) }
+				it { should have_link(@search_recipe.title) }
+				it { should_not have_link(recipe.title) }
 
 			end
 			
