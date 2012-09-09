@@ -22,4 +22,18 @@ class Recipe < ActiveRecord::Base
 	validates :directions, presence: true
 	validates :photo_url, presence: true, format: { with: VALID_URL_REGEX }
 
+	# Use case insensitive search when querying names
+	def self.search(search, page)
+		if search
+			# Although this query works, apparently it is not a paginated query and will load the entire database
+			# @recipes=find(:all, conditions: ['title ILIKE ?', "%#{search}%"]).paginate(page: page)
+
+			# Good query
+			@recipes=Recipe.paginate(page: page, conditions: ['title ILIKE ?', "%#{search}%"])
+		else
+			@recipes=Recipe.paginate(page: page)
+		end
+		
+	end
+
 end

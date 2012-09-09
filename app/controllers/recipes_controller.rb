@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
 
 	def index
 		@user = current_user
-		@recipes = Recipe.paginate(page: params[:page])
+		@recipes = Recipe.search(params[:search], params[:page])
 	end
 
 	def new

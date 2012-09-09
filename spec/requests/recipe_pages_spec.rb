@@ -31,6 +31,35 @@ describe "RecipePages" do
 			end
 		end
 
+
+		describe "search" do
+
+			it { should have_selector('form', name: "search") }
+
+			describe "search" do
+				before do
+					@search_recipe = Recipe.new(title: "Smoothies", 
+						ingredients: "lots of fruits",
+						directions: "mix and blend and enjoy",
+						photo_url: "http://www.google.com/logos/2012/startrek12-hp.jpg")
+					@search_recipe.save!
+				end
+
+				it { should have_button( "search_btn" ) }
+				it { should have_field('search', type: 'text') }
+
+				# before do
+				# 	fill_in "search", with: "frUIt"
+				# 	click_button "search_btn"
+				# end
+
+				# it { should have_link(@search_recipe.title) }
+				# it { should_not have_link(recipe.title) }
+
+			end
+			
+		end
+
 	end
 
 	describe "new" do

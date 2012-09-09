@@ -1,7 +1,7 @@
 <% provide(:title, "All Recipes") %>
 <div class="row">
 	
-	<aside class="span4">
+	<aside class="span3">
 		<section>
 			<h1>
 				<%= gravatar_for @user, size: 40 %>
@@ -12,12 +12,28 @@
 </div>
 <div class="row">
 
-	<div class="span8 offset4">
-      <h1>All Recipes</h1>
-      <br>
-      <ol class="recipes">
-        <%= render @recipes %>
-      </ol>
-      <%= will_paginate %>
-    </div>
+	<div class="span9 offset3">
+		<h1>All Recipes</h1>
+
+		<div class="row"> 
+			<div class="span8">
+				<form action=<%= recipes_path%> method: 'get' do %>
+					<%= text_field_tag :search, params[:search], {onchange: 'this.form.submit()'} %>
+				</form>
+			</div>
+			<div class="span1">
+				<button class="btn btn-mini" type="submit" id="search_btn">
+					<i class="icon-search"></i>
+				</button>
+			</div>
+		</div>
+		
+
+
+		<br>
+		<ol class="recipes">
+			<%= render @recipes %>
+		</ol>
+		<%= will_paginate %>
+	</div>
 </div>
