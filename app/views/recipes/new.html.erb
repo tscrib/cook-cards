@@ -1,0 +1,14 @@
+<% provide( :title, 'New Recipe' ) %>
+
+<h1>New Recipe</h1>
+
+<div class="row">
+	<div class="span6 offset3">
+		<%= form_for(@recipe) do |f| %>
+
+		<%= render 'fields', f: f %>
+
+		<%= f.submit "Create Recipe", class: "btn btn-large btn-info" %>
+		<% end %>
+	</div>
+</div>

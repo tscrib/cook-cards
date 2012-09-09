@@ -3,22 +3,27 @@
 
 <li>
 	<div class="span1">
-		<%= link_to image_tag(recipe.photo_url, class: "img-polaroid"), recipe %>
+		<%= link_to image_tag(recipe.photo_url), recipe %>
 		
 	</div>
-	<div class="span4 offset1">
-		<div class="row">
+	<div class="span5">
+
 			<h3><%= link_to recipe.title, recipe  %></h3>
-		</div>
-		<div class="row">
+
 			<i class="icon-time"></i> 45min
-		</div>
-		<div class="row">
+
 			<i class="icon-home"></i> Serves 4
-		</div>
+
 	</div>
-	<div class="span1 offset1">
-		<button class="btn btn-mini" type="button"><i class="icon-plus"></i></button>
+	<div class="span2">
+
+		<%= btn_icon "icon-plus" %>
+		
+		<% if current_user.admin? %>
+			<%= btn_icon "icon-remove", { obj: recipe, method: :delete } %>
+			<%= btn_icon "icon-pencil", { obj: recipe, method: :put } %>
+		<% end %>
+
 	</div>
 
 </li>

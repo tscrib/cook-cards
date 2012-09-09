@@ -1,0 +1,15 @@
+<!-- Partial for the Recipes fields -->
+
+<%= render 'shared/error_messages', object: f.object %>
+
+<%= f.label :title %>
+<%= f.text_field :title %>
+
+<%= f.label :ingredients %>
+<%= f.text_area :ingredients, rows: "10" %>
+
+<%= f.label :directions %>
+<%= f.text_area :directions, rows: "10" %>
+
+<%= f.label :photo_url, "Photo URL" %>
+<%= f.text_field :photo_url %>

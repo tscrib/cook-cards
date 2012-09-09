@@ -6,8 +6,6 @@
 		<%= text_field_tag :search, @param, {onchange: 'this.form.submit()', id: "search_field"} %>
 	</div>
 	<div class="span1">
-		<button class="btn btn-mini" type="submit" id="search_btn">
-			<i class="icon-search"></i>
-		</button>
+		<%= btn_icon "icon-search" %>
 	</form>
 </div>
