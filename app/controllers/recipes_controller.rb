@@ -19,7 +19,8 @@ class RecipesController < ApplicationController
 			flash[:success] = "Your Recipe was Created!"
 			redirect_to recipe_path(@recipe)
 	    else
-	      render 'new'
+	    	handle_failed_create( params[:recipe] )
+	      # render 'new'
 	    end
 	end
 
@@ -81,5 +82,10 @@ class RecipesController < ApplicationController
 
 	def admin_user
 		redirect_to(root_path) unless current_user.admin?
+	end
+
+	def handle_failed_create( recipe_param )
+		render 'new'
+
 	end
 end

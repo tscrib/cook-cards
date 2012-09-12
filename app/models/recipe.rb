@@ -11,6 +11,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+
 include RecipesHelper
 
 class Recipe < ActiveRecord::Base
@@ -20,7 +21,8 @@ class Recipe < ActiveRecord::Base
 
 	validates :title, presence: true
 	validates :directions, presence: true
-	validates :photo_url, presence: true, format: { with: VALID_URL_REGEX }
+	validates :ingredients, presence: true
+	validates :photo_url, presence: true#, format: { with: VALID_URL_REGEX }
 
 	# Use case insensitive search when querying names
 	def self.search(search, page)

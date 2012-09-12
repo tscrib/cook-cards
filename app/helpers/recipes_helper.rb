@@ -40,33 +40,48 @@ module RecipesHelper
 	# Searches both 'title' and 'src' tags
 	def scrape_img( page, title )
 		@desired_node=@img_url=nil
+		@desired_nodes=[]
 
-		title = title.strip.slice(1..5).downcase
+		title = scrape_title( page )
+		title.slice!(title.rindex("|")..title.length) unless title.rindex("|").nil?
+		title_words = title.downcase.strip.split(/ |-/).reject{|s| s=~/(\|)|(with)|(recipe)|( [a-z]{1,3} )|\d/}
 
 		# for all 'img' tags, determine if it's title tag is 
 		# similar to the recipe title, or determine if the image filename
 		# itself is similar to the title of the recipe. If so, hold on to the node
 		page.search("img").each do |node|
-			unless node.attr("title").nil?
-				if node.attr("title").downcase =~ /(#{title})/
-					@desired_node=node
-					break
+			unless node.nil?
+				unless node.attr("title").nil?
+					title_words.each do |word|
+						if node.attr("title").downcase =~ /(#{word})/
+							@desired_nodes.push(node)
+							break
+						end
+					end
 				end
-			end
 
-			unless node.attr("src").nil?
-				if node.attr("src").split(/\//).last.gsub("-", " ").gsub("_", " ").downcase =~ /(#{title})/
-					@desired_node=node
-					break
+				unless node.attr("src").nil?
+					title_words.each do |word|
+						if node.attr("src").split(/\//).last.downcase =~ /(#{word})/
+							@desired_nodes.push(node)
+							break
+						end
+					end
 				end
 			end
 		end
 			
 		# Some sites strip out the host; add it, if necessary
-		@img_url = @desired_node.attr("src")
-		@img_url = ( "http:///" << page.canonical_uri.host << @img_url ) unless uri?( @img_url )
-		puts @img_url
-		return @img_url
+		# Use default image if the algorithm couldn't find anything
+		@img_url = @desired_nodes.first.attr("src")
+
+		if @img_url.nil?
+			return "/assets/img_404.png"
+		else
+			@img_url = ( "http://" << page.canonical_uri.host << @img_url ) unless uri?( @img_url )
+			puts @img_url
+			return @img_url
+		end
 	end
 
 	# Performs a check on the input string to see if it is a valid URI

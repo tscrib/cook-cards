@@ -3,21 +3,23 @@
 <!-- Ensure that one user is selected -->
 <% @user ||= current_user %>
 
-<section>
-	<h1>
-		<a href="<%= user_path(@user) %>">
-		<%= gravatar_for @user, size: 40 %>
-		</a>
+<%= content_tag :section do %>
+	<%= content_tag :h1 do %>
+		<%= link_to user_path(@user) do %>
+			<%= gravatar_for @user, size: 40 %>
+		<% end %>
 		<%= @user.name %>
-	</h1>
+	<% end %>
 
-	<div class="stats">
+	<%= content_tag :div, class: "stats" do %>
 		
-			<strong id="added recipes" class="stat">
-				<%= @user.added_recipes.count %>
-			</strong>
-			Recipes
-		
-	</div>
+		<%= content_tag :strong, id: "added recipes", class: "stat" do %>
+			<%= pluralize(@user.added_recipes.count, 'Recipe') %> 
+		<% end %>
+	<% end %>
 
-</section>
+<% end %>
+
+<% if @user == current_user %>
+	<%= button_to "Add new Recipe", "/recipes/new", class: "btn", type: "button", method: :get %>
+<% end %>

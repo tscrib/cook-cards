@@ -1,22 +1,23 @@
 <% provide(:title, "All Recipes") %>
 
 
-<div class="row">
+<%= content_tag :div, class: "row" do %>
 	
 	<%= render 'shared/sidebar' %>
 
-	<div class="span9">
-		<h1>All Recipes</h1>
+	<%= content_tag :div, class: "span9" do %>
+		<%= content_tag :h1, "All Recipes" %>
 
-		<div class="row"> 
+		<%= content_tag :div, class: "row" do %> 
 			<%= render 'shared/search_bar', param: params[:search] %>
 			<%= render 'shared/add_bar' %>
-		</div>
+		<% end %>
 
-		<ol class="recipes">
+		<%= content_tag :ol, class: "recipes" do %>
 			<%= render @recipes %>
-		</ol>
+		<% end %>
+		
 		<%= will_paginate %>
-	</div>
-</div>
+	<% end %>
+<% end %>
 

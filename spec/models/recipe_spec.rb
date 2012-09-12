@@ -54,11 +54,12 @@ describe Recipe do
 		end
 
 		# Format Tests
-
-		describe "with bad photo url" do
-			before { recipe.photo_url = "www.google" }
-			it { should_not be_valid }
-		end
+		# this case is now handled by assigning the photo to a default photo
+		
+		# describe "with bad photo url" do
+		# 	before { recipe.photo_url = "www.google" }
+		# 	it { should_not be_valid }
+		# end
 	end
 
 end
