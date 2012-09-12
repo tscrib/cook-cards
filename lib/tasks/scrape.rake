@@ -32,27 +32,38 @@ end
 task :tim => :environment do
 	agent = Mechanize.new
 	# agent.get"http://www.vegetariantimes.com/recipe/poached-eggs-over-asparagus/"
-	# agent.get("http://www.marthastewart.com/911343/thick-burger?czone=food/best-grilling-recipes/grilling-recipes&center=276943&gallery=275667&slide=911343")
-	agent.get("http://allrecipes.com/Recipe/Cheese-Ravioli-with-Fresh-Tomato-and-Artichoke-Sauce/Detail.aspx")
+	agent.get("http://www.marthastewart.com/911343/thick-burger?czone=food/best-grilling-recipes/grilling-recipes&center=276943&gallery=275667&slide=911343")
+	# agent.get("http://allrecipes.com/Recipe/Cheese-Ravioli-with-Fresh-Tomato-and-Artichoke-Sauce/Detail.aspx")
 
 	title = scrape_title( agent.page ).strip.slice(1..5).downcase
-	puts title
+	# puts title
+	@desired_node=@img_url=nil
 
 	agent.page.search("img").each do |node|
 
 		unless node.attr("title").nil?
-			puts "1" if node.attr("title").downcase =~ /(#{title})/
+			# puts "1" if node.attr("title").downcase =~ /(#{title})/
 			# puts node.attr("title")
+			if node.attr("title").downcase =~ /(#{title})/
+				@desired_node=node
+				break
+			end
 		end
 
 		unless node.attr("src").nil?
-			puts "2" if node.attr("src").split(/\//).last.gsub("-", " ").gsub("_", " ").downcase =~ /(#{title})/
+			# puts "2" if node.attr("src").split(/\//).last.gsub("-", " ").gsub("_", " ").downcase =~ /(#{title})/
 			# puts node.attr("src").split(/\//).last.gsub("-", " ").gsub("_", " ").downcase
+			if node.attr("src").split(/\//).last.gsub("-", " ").gsub("_", " ").downcase =~ /(#{title})/
+				@desired_node=node
+				break
+			end
 		end
-
-
 	end
 
+	# puts uri?(@desired_node.attr("src"))
 	# puts "hello"				
+	@img_url = @desired_node.attr("src")
+	@img_url = ( agent.page.canonical_uri.host << @img_url ) unless uri?( @img_url )
 
+	puts @img_url
 end

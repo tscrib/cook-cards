@@ -26,8 +26,12 @@
 			<% end %>
 			
 			<% if current_user.admin? %>
-				<%= btn_icon "icon-remove", { obj: recipe, method: :delete } %>
-				<%= btn_icon "icon-pencil", { obj: "recipes/#{recipe.id}/edit", method: :get } %>
+				<%= btn_icon "icon-remove", 
+				"btn btn-danger btn-mini", 
+				{ obj: recipe, method: :delete } %>
+				<%= btn_icon "icon-pencil", 
+				"btn btn-danger btn-mini", 
+				{ obj: "recipes/#{recipe.id}/edit", method: :get } %>
 			<% end %>
 		<% end %>
 	</div>

@@ -20,7 +20,7 @@ class Recipe < ActiveRecord::Base
 
 	validates :title, presence: true
 	validates :directions, presence: true
-	validates :photo_url, presence: true, format: { with: VALID_URL_REGEX }
+	validates :photo_url, presence: true#, format: { with: VALID_URL_REGEX }
 
 	# Use case insensitive search when querying names
 	def self.search(search, page)
@@ -43,15 +43,17 @@ class Recipe < ActiveRecord::Base
 		@directions = scrape_page( agent.page, DIRECTION_REGEX )
 		@ingredients = scrape_page( agent.page, INGREDIENT_REGEX )
 		@title = scrape_title( agent.page )
+		@photo_url = scrape_img( agent.page, @title )
+		puts @photo_url
 
-		if( @directions.blank? || @ingredients.blank?)
+		if( @directions.blank? || @ingredients.blank? || @photo_url.blank? )
 			return nil 
 		else
 			Recipe.create!( 
 				title: @title, 
 				directions: @directions,
 				ingredients: @ingredients,
-				photo_url: "http://www.marthastewart.com/sites/files/marthastewart.com/imagecache/img_l/ecl/msliving-hires/2012/08_august/in_house_cmyk/burgers/thick-burger-mld108880_vert.jpg")
+				photo_url: @photo_url)
 		end
 	end
 

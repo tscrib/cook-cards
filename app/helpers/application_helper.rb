@@ -16,13 +16,13 @@ module ApplicationHelper
   # params expected:
   # :obj
   # :method
-  def btn_icon( icon, param={} )
+  def btn_icon( icon, btn="btn btn-mini", param={} )
     if param.empty?
-      button_tag nil, class: "btn btn-mini", id: icon do
+      button_tag nil, class: btn, id: icon do
         content_tag(:i, nil, class: icon)
       end
     else
-      link_to param[:obj], class: "btn btn-mini", method: param[:method], id: icon do
+      link_to param[:obj], class: btn, method: param[:method], id: icon do
         content_tag(:i, nil, class: icon)
       end
     end
