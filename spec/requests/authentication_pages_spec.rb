@@ -137,7 +137,7 @@ describe "Authentication" do
 					before { visit recipes_path }
 					it { should have_selector('title', text: "All Recipes") }
 					it { should_not have_link( "icon-remove" ) }
-					it { should_not have_button( "icon-plus" ) }
+					it { should_not have_button( "Add to my Recipes" ) }
 					it { should_not have_link( "icon-pencil" ) }
 
 				end
@@ -205,7 +205,7 @@ describe "Authentication" do
 				before { visit recipes_path }
 
 				it { should have_link( "icon-remove" ) }
-				it { should have_button( "icon-plus" ) }
+				it { should have_button( "Add to my Recipes" ) }
 				it { should have_link( "icon-pencil" ) }
 
 				describe "edit button goes to edit page" do

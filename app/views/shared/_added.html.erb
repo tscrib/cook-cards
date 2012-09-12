@@ -1,0 +1,10 @@
+<!-- This is a partial for rendering the 'Add to my Recipes' button -->
+
+<% if current_user.added?(recipe) %>
+	<!-- TODO: Render a remove button. -->
+<% else %>
+	<%= form_for(current_user.relationships.build(recipe_id: recipe.id)) do |f| %>
+	<%= f.hidden_field :recipe_id %>
+	<%= f.submit "Add to my Recipes", class: "btn btn-small", symbol: '<i class="icon-user"></i>' %>
+	<% end %>
+<% end %>

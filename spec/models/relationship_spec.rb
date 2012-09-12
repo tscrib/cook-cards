@@ -8,14 +8,14 @@ describe Relationship do
   subject { relationship }
 
   it { should be_valid }
-
-  describe "accessible attributes" do
-    it "should not allow access to user_id" do
-      expect do
-        Relationship.new(user_id: user.id)
-      end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
-    end    
-  end
+# don't think this test is valid anymore
+  # describe "accessible attributes" do
+  #   it "should not allow access to user_id" do
+  #     expect do
+  #       Relationship.new(user_id: user.id)
+  #     end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
+  #   end    
+  # end
 
   describe "when followed id is not present" do
     before { relationship.recipe_id = nil }

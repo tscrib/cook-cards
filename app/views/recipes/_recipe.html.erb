@@ -1,29 +1,20 @@
 <!-- recipe partial -->
 <!-- This is formatted for displaying in a list -->
 
-<li>
-	<div class="span1">
+<%= content_tag :li do -%>
+	<%= content_tag :div, class: "span1" do -%>
 		<%= link_to image_tag(recipe.photo_url), recipe %>
 		
-	</div>
-	<div class="span5">
+	<% end %>
+	<%= content_tag :div, class: "span5" do -%>
 
-			<h3><%= link_to recipe.title, recipe  %></h3>
+		<%= content_tag :h3, link_to( recipe.title, recipe ) -%>
+		<%= render "shared/time_servings" %>
 
-			<i class="icon-time"></i> 45min
-
-			<i class="icon-home"></i> Serves 4
-
-	</div>
-	<div class="span2">
-		<% if !current_user.nil? %>
-			<%= btn_icon "icon-plus" %>
-
-			<%= form_for(current_user.relationships.build(recipe_id: recipe.id)) do |f| %>
-			<%= f.hidden_field :recipe_id %>
-			<%= f.submit nil, class: "btn btn-mini", symbol: '<i class="icon-user"></i>' %>
-
-			<% end %>
+	<% end %>
+	<%= content_tag :div, class: "span2" do -%>
+		<% if signed_in? %>
+    		<%= render 'shared/added', recipe: recipe, return_to:request.url %>
 			
 			<% if current_user.admin? %>
 				<%= btn_icon "icon-remove", 
@@ -34,6 +25,5 @@
 				{ obj: "recipes/#{recipe.id}/edit", method: :get } %>
 			<% end %>
 		<% end %>
-	</div>
-
-</li>
+	<% end %>
+<% end %>
