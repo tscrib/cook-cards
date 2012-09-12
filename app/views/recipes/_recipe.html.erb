@@ -20,8 +20,9 @@
 			<%= btn_icon "icon-plus" %>
 
 			<%= form_for(current_user.relationships.build(recipe_id: recipe.id)) do |f| %>
-			<div><%= f.hidden_field :recipe_id %></div>
-			<%= f.submit "+", class: "btn btn-mini" %>
+			<%= f.hidden_field :recipe_id %>
+			<%= f.submit nil, class: "btn btn-mini", symbol: '<i class="icon-user"></i>' %>
+
 			<% end %>
 			
 			<% if current_user.admin? %>

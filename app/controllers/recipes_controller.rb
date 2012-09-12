@@ -55,6 +55,22 @@ class RecipesController < ApplicationController
 		redirect_to recipes_url
 	end
 
+	def add_by_url
+		# render "good work"
+		url = params[:add_by_url]
+		if uri?( url )
+			
+			if Recipe.add_by_url( url )
+				flash[:success] = "Recipe Created!"
+			else
+				flash[:error] = "Recipe not found on page"
+			end
+		else
+			flash[:error] = "Recipe URL incorrect"
+		end
+		redirect_to recipes_path
+	end
+
 	# private methods
 	private
 

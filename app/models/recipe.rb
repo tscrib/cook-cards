@@ -11,7 +11,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-
+include RecipesHelper
 
 class Recipe < ActiveRecord::Base
 	attr_accessible :directions, :ingredients, :photo_url, :title
@@ -34,6 +34,25 @@ class Recipe < ActiveRecord::Base
 			@recipes=Recipe.paginate(page: page)
 		end
 		
+	end
+
+	def self.add_by_url( url )
+		agent = Mechanize.new
+		agent.get(url)
+
+		@directions = scrape_page( agent.page, DIRECTION_REGEX )
+		@ingredients = scrape_page( agent.page, INGREDIENT_REGEX )
+		@title = scrape_title( agent.page )
+
+		if( @directions.blank? || @ingredients.blank?)
+			return nil 
+		else
+			Recipe.create!( 
+				title: @title, 
+				directions: @directions,
+				ingredients: @ingredients,
+				photo_url: "http://www.marthastewart.com/sites/files/marthastewart.com/imagecache/img_l/ecl/msliving-hires/2012/08_august/in_house_cmyk/burgers/thick-burger-mld108880_vert.jpg")
+		end
 	end
 
 end

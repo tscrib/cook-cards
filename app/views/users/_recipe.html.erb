@@ -21,7 +21,7 @@
 
 			<%= form_for(current_user.relationships.build(recipe_id: recipe.id)) do |f| %>
 			<div><%= f.hidden_field :recipe_id %></div>
-			
+
 			<%= f.submit nil, class: "btn btn-mini" do %>
 			<% end %>
 			

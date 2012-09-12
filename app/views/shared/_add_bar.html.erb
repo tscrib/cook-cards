@@ -1,0 +1,16 @@
+<!-- add_bar partial -->
+
+
+<%= form_tag action: 'add_by_url' do %>
+	<%= content_tag :div, class: "span8" do -%>
+
+		<%= text_field_tag :add_by_url, @param, {
+			onchange: 'this.form.submit()', 
+			id: "add_by_url_field", 
+			value: "Add Recipe by URL"} %>
+
+	<% end -%>
+	<%= content_tag :div, class: "span1" do -%>
+		<%= btn_icon "icon-plus" %>
+	<% end -%>
+<% end -%>

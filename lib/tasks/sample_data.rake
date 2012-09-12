@@ -3,7 +3,7 @@ namespace :db do
   task populate: :environment do
 
     make_users
-    make_recipes
+    make_recipe
     make_relationships
   end
 end
@@ -33,6 +33,15 @@ def make_users
      password: password,
      password_confirmation: password)
   end
+end
+
+def make_recipe
+  # create one recipes
+  # But first make one that makes sense
+  Recipe.create!( title: "Onion Quiche",
+    directions: "1. Take out Ingredients\n2. Make the quiche",
+    ingredients: "eggs, bread, milk, cinnamon",
+    photo_url: "http://1.bp.blogspot.com/_sVmXW6c9FJE/ShqDlqHymuI/AAAAAAAADQA/otVS1-1UL7g/s400/creamy-quiche-lorraine.jpg")
 end
 
 def make_recipes

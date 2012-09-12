@@ -7,6 +7,8 @@ gem 'bcrypt-ruby', '3.0.1'      # to encrypt password
 gem 'faker', '1.0.1'            # to create fake db entries
 gem 'will_paginate', '3.0.3'    # pagination library
 gem 'bootstrap-will_paginate', '0.0.6' # allows pagination to use bootstrap css
+gem 'nokogiri'
+gem 'mechanize'
 
 group :development do
   gem 'rspec-rails', '2.11.0'
