@@ -7,7 +7,8 @@
 			<%= content_tag :div, class: "row" do -%>
 				<%= render 'photo', recipe: @recipe %>
 				<%= content_tag :br -%>
-				<%= render "shared/time_servings" %>
+				<!-- add this line back when servings/time is implemented -->
+				<!-- render "shared/time_servings" %-->
 			<% end -%>
 			<%= content_tag :div, class: "row" do -%>
 				<% if signed_in? %>

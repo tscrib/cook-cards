@@ -79,7 +79,6 @@ module RecipesHelper
 			return "/assets/img_404.png"
 		else
 			@img_url = ( "http://" << page.canonical_uri.host << @img_url ) unless uri?( @img_url )
-			puts @img_url
 			return @img_url
 		end
 	end

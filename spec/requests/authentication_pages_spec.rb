@@ -37,7 +37,7 @@ describe "Authentication" do
 			end
 
 			describe "after visiting another page" do
-				before { click_link "Home" }
+				before { click_link "My Recipes" }
 				it { should_not have_error_message('') }
 			end
 		end

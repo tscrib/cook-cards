@@ -46,7 +46,6 @@ class Recipe < ActiveRecord::Base
 		@ingredients = scrape_page( agent.page, INGREDIENT_REGEX )
 		@title = scrape_title( agent.page )
 		@photo_url = scrape_img( agent.page, @title )
-		puts @photo_url
 
 		if( @directions.blank? || @ingredients.blank? || @photo_url.blank? )
 			return nil 
@@ -58,5 +57,4 @@ class Recipe < ActiveRecord::Base
 				photo_url: @photo_url)
 		end
 	end
-
 end
