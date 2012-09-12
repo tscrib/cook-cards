@@ -1,8 +1,6 @@
-require "~/rails_projects/cook-cards/app/helpers/recipes_helper"
-include RecipesHelper
-
 desc "Scrape websites for recipes"
 task :scrape => :environment do
+	include RecipesHelper
 
 	agent = Mechanize.new
 	# agent.get("http://www.marthastewart.com/911343/thick-burger?czone=food/best-grilling-recipes/grilling-recipes&center=276943&gallery=275667&slide=911343")
@@ -24,12 +22,12 @@ task :scrape => :environment do
 		directions: @directions,
 		ingredients: @ingredients,
 		photo_url: "http://www.marthastewart.com/sites/files/marthastewart.com/imagecache/img_l/ecl/msliving-hires/2012/08_august/in_house_cmyk/burgers/thick-burger-mld108880_vert.jpg")
-
-
-
 end
 
+desc "For testing algorithms"
 task :tim => :environment do
+	include RecipesHelper
+
 	agent = Mechanize.new
 	# agent.get"http://www.vegetariantimes.com/recipe/poached-eggs-over-asparagus/"
 	agent.get("http://www.marthastewart.com/911343/thick-burger?czone=food/best-grilling-recipes/grilling-recipes&center=276943&gallery=275667&slide=911343")
